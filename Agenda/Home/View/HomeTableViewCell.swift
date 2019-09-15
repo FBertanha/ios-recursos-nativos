@@ -14,6 +14,19 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageAluno: UIImageView!
     @IBOutlet weak var labelNomeDoAluno: UILabel!
+    
+    func configuraCelula(_ aluno : Aluno) {
+//        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(abrirActionSheet(_:)))
+        labelNomeDoAluno.text = aluno.nome
+        imageAluno.layer.cornerRadius = imageAluno.frame.width / 2
+        imageAluno.layer.masksToBounds = true
+        
+        if let imagemDoAluno = aluno.foto as? UIImage {
+            imageAluno.image = imagemDoAluno
+        }
+        
+//        addGestureRecognizer(longPress)
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

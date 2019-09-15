@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class HomeTableViewController: UITableViewController, UISearchBarDelegate {
+class HomeTableViewController: UITableViewController, UISearchBarDelegate, NSFetchedResultsControllerDelegate {
     
     //MARK: - Variáveis
     
@@ -21,6 +21,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     var mensagem : Mensagem = Mensagem()
+    var alunoViewController : AlunoViewController?
     
     // MARK: - View Lifecycle
 
@@ -31,6 +32,12 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: - Métodos
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editar" {
+            alunoViewController = segue.destination as? AlunoViewController
+        }
+    }
     
     func configuraSearch() {
         self.searchController.searchBar.delegate = self
@@ -43,6 +50,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
         let ordenaPorNome = NSSortDescriptor(key: "nome", ascending: true)
         pesquisaAluno.sortDescriptors = [ordenaPorNome]
         gerenciadorDeResultados = NSFetchedResultsController(fetchRequest: pesquisaAluno, managedObjectContext: contexto, sectionNameKeyPath: nil, cacheName: nil)
+        gerenciadorDeResultados?.delegate = self
         
         do {
             try gerenciadorDeResultados?.performFetch()
@@ -64,6 +72,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
             switch opcao {
             case .sms:
                 print("SMS")
+                
                 
                 if let componenteMensagem = self.mensagem.configuraSMS(alunoSelecionado) {
                     componenteMensagem.messageComposeDelegate = self.mensagem
@@ -89,17 +98,11 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celula-aluno", for: indexPath) as! HomeTableViewCell
         
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(abrirActionSheet(_:)))
+        
         
         guard let aluno = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return cell }
         
-        cell.labelNomeDoAluno.text = aluno.nome
-        
-        if let imagemDoAluno = aluno.foto as? UIImage {
-            cell.imageAluno.image = imagemDoAluno
-        }
-        
-        cell.addGestureRecognizer(longPress)
+        cell.configuraCelula(aluno)
         
         return cell
     }
@@ -110,11 +113,39 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            guard let alunoSelecionado = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else {return}
+            
+            contexto.delete(alunoSelecionado)
+            do {
+                try contexto.save()
+            } catch {
+                print(error.localizedDescription)
+            }
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let alunoSelecionado = gerenciadorDeResultados?.fetchedObjects![indexPath.row] else { return }
+        
+        
+        alunoViewController?.aluno = alunoSelecionado
+    }
+    
+    //MARK : - FetchedResultsCOotrollerDelegate
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .delete:
+            // Delete the row from the data source
+            guard let indexPath = indexPath else {return}
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            break;
+        default:
+            tableView.reloadData()
+        }
     }
 
 }
