@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Agenda/Home/Controller/HomeTableViewController.swift"
-            timestampString = "590256258.3824379"
+            timestampString = "590454464.676795"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
@@ -33,6 +33,70 @@
             endingLineNumber = "15"
             landmarkName = "configuraSMS(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Agenda/Mapa/Controller/MapaViewController.swift"
+            timestampString = "590454464.676903"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "localizacaoInicial()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Agenda/Mapa/Controller/MapaViewController.swift"
+            timestampString = "590454464.677328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "localizacaoInicial()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Agenda.MapaViewController.localizacaoInicial() -&gt; ()"
+                  moduleName = "Agenda"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/felipebertanha/XCodeiOsProjects/ios-recursos-nativos-parte-1/Agenda/Mapa/Controller/MapaViewController.swift"
+                  timestampString = "590454091.722283"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.CLPlacemark) -&gt; () in Agenda.MapaViewController.localizacaoInicial() -&gt; ()"
+                  moduleName = "Agenda"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/felipebertanha/XCodeiOsProjects/ios-recursos-nativos-parte-1/Agenda/Mapa/Controller/MapaViewController.swift"
+                  timestampString = "590454091.724233"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "160">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

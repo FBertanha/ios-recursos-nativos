@@ -16,7 +16,6 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var labelNomeDoAluno: UILabel!
     
     func configuraCelula(_ aluno : Aluno) {
-//        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(abrirActionSheet(_:)))
         labelNomeDoAluno.text = aluno.nome
         imageAluno.layer.cornerRadius = imageAluno.frame.width / 2
         imageAluno.layer.masksToBounds = true
